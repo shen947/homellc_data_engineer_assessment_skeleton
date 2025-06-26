@@ -70,13 +70,40 @@ Use **MySQL** and SQL for all database work
 ### Solution
 
 > **Document your database design and solution here:**  
-> - Explain your schema and any design decisions  
-> - Give clear instructions on how to run and test your script
+> **The raw CSV file was flattened and lacked relational structure. I designed a normalized schema consisting of four main tables:**
+
+> - addresses - stores street, city, state, zip, country.
+
+> - financials - includes list price, taxes, net yield, and IRR.
+
+> - properties - connects each property to its address and financial info, with a purchase date and title.
+
+> - features - describes the number of bedrooms, bathrooms, square footage, and basement presence per property.
+
+> - All tables use integer primary keys and appropriate foreign key constraints to preserve referential integrity.
+
 
 > **Document your ETL logic here:**  
-> - Outline your approach and design  
-> - Provide instructions and code snippets for running the ETL  
-> - List any requirements
+> **How to Run the Project:**
+
+> Start Docker:
+> -docker compose up -d
+
+> Load the schema into MySQL:
+> -docker exec -i homellc-mysql mysql -u root -p6equj5_root < sql/schema.sql
+
+> Install Python dependencies:
+> -pip install -r requirements.txt
+
+> Run the ETL script:
+> -python scripts/etl.py --csv sql/fake_data.csv --config sql/"Field Config.xlsx"
+
+> Verify the load:
+> -Use MySQL to check row counts in each table.
+
+> The script reads the raw data using pandas, normalizes it by creating deduplicated reference tables, assigns surrogate keys, merges foreign keys back into the main data, and finally loads each table into MySQL using mysql-connector-python.
+
+> All logic is kept lightweight, readable, and reproducible.
 
 ---
 
