@@ -86,22 +86,22 @@ Use **MySQL** and SQL for all database work
 **Document your ETL logic here:**  
 **How to Run the Project:**
 
-Start Docker:
--docker compose up -d
+**Start Docker**:
+- docker compose up -d
 
-Load the schema into MySQL:
--docker exec -i homellc-mysql mysql -u root -p6equj5_root < sql/schema.sql
+**Load the schema into MySQL:**
+- docker exec -i homellc-mysql mysql -u root -p6equj5_root < sql/schema.sql
 
-Install Python dependencies:
--pip install -r requirements.txt
+**Install Python dependencies:**
+- pip install -r requirements.txt
 
-Run the ETL script:
--python scripts/etl.py --csv sql/fake_data.csv --config sql/"Field Config.xlsx"
+**Run the ETL script:**
+- python scripts/etl.py --csv sql/fake_data.csv --config sql/"Field Config.xlsx"
 
-Verify the load:
--Use MySQL to check row counts in each table.
+**Verify the load:**
+- Use MySQL to check row counts in each table.
 
-The script reads the raw data using pandas, normalizes it by creating deduplicated reference tables, assigns surrogate keys, merges foreign keys back into the main data, and finally loads each table into MySQL using mysql-connector-python.
+**The script reads the raw data using pandas, normalizes it by creating deduplicated reference tables, assigns surrogate keys, merges foreign keys back into the main data, and finally loads each table into MySQL using mysql-connector-python.**
 
 All logic is kept lightweight, readable, and reproducible.
 
